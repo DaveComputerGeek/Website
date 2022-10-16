@@ -1,0 +1,136 @@
+*,
+*::before,
+*::after
+{
+  box-sizing: border-box;
+}
+
+:root
+{
+  --color-sky: #78A7ff;
+  --color-sun: #ffffcc;
+  --color-dirt: #926C4D;
+  --color-path: #ac9453;
+  --color-grass: #228b22;
+  --color-stone: #837c7c;
+  --color-void: #17191a;
+  --color-lava: #e67300;
+}
+
+html,
+body
+{
+  margin: 0;
+  padding: 0;
+  background-color: var( --color-void );
+  color: #ffffff;
+  font-family: sans-serif;
+  font-size: 16px;
+}
+
+.container
+{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+header
+{
+  background-color: var( --color-sky );
+  color: #fff;
+  text-shadow: 0 0 2px #666;
+  position: relative;
+}
+
+header::before
+{
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 2rem;
+  height: 2rem;
+  background-color: var( --color-sun );
+  box-shadow: 0 0 5px 2px var( --color-sun );
+}
+
+header h1
+{
+  font-size: 1.3rem;
+  margin-bottom: 0;
+}
+
+header p
+{
+  font-size: 0.8rem;
+  margin-top: 0;
+}
+
+nav
+{
+  padding-top: 1rem;
+  background-color: var( --color-grass );
+  font-size: 0.7rem;
+  border-bottom: 2rem solid var( --color-dirt );
+}
+
+nav .container
+{
+  padding: 0.5rem 0;
+}
+
+nav ul
+{
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav a
+{
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  text-shadow: 0 0 2px #666;
+  text-transform: uppercase;
+}
+
+nav a.current
+{
+  background-color: var( --color-path );
+}
+
+main
+{
+  background-color: var( --color-stone );
+  position: relative;
+}
+
+main::before
+{
+  left: 0;
+}
+
+main::after
+{
+  right: 0;
+}
+
+main::before,
+main::after
+{
+  content: "";
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  background-color: var( --color-dirt );
+  top: 0;
+}
+
+footer
+{
+  border-top: 1rem solid var( --color-lava );
+}

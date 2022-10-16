@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Dave Computer Geek</title>
+    
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+  </head>
+  
+  <body>
+    <header>
+      <div class="container">
+        <h1>Dave Computer Geek</h1>
+        <p>Gamer. Web Developer. Technology Geek.</p>
+      </div>
+    </header>
+    
+    <nav>
+      <div class="container">
+        <ul>
+          <li><a href="/"{% if page.url == '/' %} class="current"{% endif %}>Home</a></li>
+          <li><a href="/contact/"{% if page.url.substr( 0, 9 ) == "/contact/" %} class="current"{% endif %}>Contact</a></a>
+          <li><a href="/blog/"{% if page.url.substr( 0, 6 ) == "/blog/" %} class="current"{% endif %}>Blog</a></li>
+        </ul>
+      </div>
+    </nav>
+    
+    <main>
+      <div class="container">
+        {{ content | safe }}
+      </div>
+    </main>
+    
+    <footer>
+      <div class="container">
+        <p>Copyright &copy; Dave Computer Geek.</p>
+      </div>
+    </footer>
+  </body>
+</html>

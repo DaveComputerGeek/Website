@@ -204,6 +204,12 @@ article .buttons a
   text-decoration: none;
 }
 
+.article img
+{
+  margin: 0 -1rem;
+  max-width: calc( 100% + 2rem );
+}
+
 section.lava
 {
   display: block;

@@ -39,9 +39,15 @@ body
   margin: 0;
   padding: 0;
   background-color: var( --color-void );
-  color: #ffffff;
   font-family: sans-serif;
   font-size: 16px;
+}
+
+html,
+body,
+a
+{
+  color: #ffffff;
 }
 
 .container
@@ -108,7 +114,6 @@ nav a
 {
   padding: 0.5rem 1rem;
   text-decoration: none;
-  color: #fff;
   font-weight: bold;
   text-shadow: 0 0 2px #666;
   text-transform: uppercase;
@@ -144,6 +149,11 @@ main::after
   height: 1rem;
   background-color: var( --color-dirt );
   top: 0;
+}
+
+main a
+{
+  font-weight: bold;
 }
 
 section.lava

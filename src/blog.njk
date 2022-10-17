@@ -1,0 +1,20 @@
+---
+layout: "base.njk"
+---
+
+<h2>The Blog</h2>
+
+<section class="articles">
+  {% for article in collections.article %}
+    <article>
+      <div class="title">{{ article.data.title }}</div>
+      <div class="metadata">Published by {{ article.data.author }} on {{ article.data.date | postDate }} at {{ article.data.time }}.</div>
+      <div class="excerpt">
+        {{ article.data.excerpt }}
+      </div>
+      <div class="buttons">
+        <a href="{{ article.url }}">Read More</a>
+      </div>
+    </article>
+  {% endfor %}
+</section>

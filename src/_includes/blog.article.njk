@@ -1,0 +1,8 @@
+---
+layout: 'base.njk'
+---
+
+<h2>{{ title }}</h2>
+<p class="metadata">Published by {{ author }} on {{ date | postDate }} at {{ time }}.</p>
+
+{{ content | safe }}

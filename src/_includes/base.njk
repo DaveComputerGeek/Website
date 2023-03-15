@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>{% if page_title %}{{ page_title }} - {% endif %}{{ site_name }}{% if not page_title %} - {{ site_tagline }}{% endif %}</title>
+        <title>{% if page.url.substr( 0, 6 ) == "/blog/" and page.url.length > 6 %}{{ article_title }} - Blog - {% endif %}{% if page_title %}{{ page_title }} - {% endif %}{{ site_name }}{% if not page_title and page.url.substr( 0, 6 ) != "/blog/" %} - {{ site_tagline }}{% endif %}</title>
 
         {% if stylesheets %}
             {% for stylesheet in stylesheets %}

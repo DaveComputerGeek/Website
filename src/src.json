@@ -5,5 +5,8 @@
     "layout": "base.njk",
     "stylesheets": [
         "/assets/css/main.css"
+    ],
+    "javascripts": [
+        "/assets/js/anti-email-harvesting.js"
     ]
 }

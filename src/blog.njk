@@ -1,0 +1,28 @@
+---
+page_title: "Blog"
+current_nav_item: "blog"
+---
+
+<h2>The Blog</h2>
+
+<section class="article">
+    {% if collections.blog_articles %}
+        {% for blog_article in collections.blog_articles %}
+            <article>
+                <div class="title">{{ blog_article.data.article_title }}</div>
+                <div class="metadata">Published by {{ blog_article.data.article_author }} on {{ blog_article.data.article_datetime }}.</div>
+                <div class="excerpt">
+                    {{ blog_article.data.article_excerpt }}
+                </div>
+                <div class="buttons">
+                    <a href="{{ blog_article.url }}">Read More</a>
+                </div>
+            </article>
+        {% endfor %}
+    {% else %}
+        <article>
+            <div class="title">No Articles</div>
+            <div class="excerpt">Sorry, there are currently no blog articles. Please check back later.</div>
+        </article>
+    {% endif %}
+</section>

@@ -1,0 +1,8 @@
+{
+    "current_nav_item": "blog",
+    "article_author": "Dave Computer Geek",
+    "tags": [
+        "blog_articles"
+    ],
+    "layout": "blog.article.njk"
+}

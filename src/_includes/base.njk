@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>{% if page_title %}{{ page_title }} - {% endif %}{{ site_name }}{% if not page_title %} - {{ site_tagline }}{% endif %}</title>
+
+        {% if stylesheets %}
+            {% for stylesheet in stylesheets %}
+                <link rel="stylesheet" type="text/css" href="{{ stylesheet }}">
+            {% endfor %}
+        {% endif %}
+    </head>
+    
+    <body>
+        <header>
+            <div class="container">
+                <h1>{{ site_name }}</h1>
+                <p>{{ site_tagline }}</p>
+            </div>
+        </header>
+
+        <nav>
+            <div class="container">
+                <ul>
+                    <li><a href="/"{% if current_nav_item == "home" %} class="current"{% endif %}>Home</a></li>
+                    <li><a href="/contact"{% if current_nav_item == "contact" %} class="current"{% endif %}>Contact</a></li>
+                    <li><a href="/blog"{% if current_nav_item == "blog" %} class="current"{% endif %}>Blog</a></li>
+                </ul>
+            </div>
+        </nav>
+    
+        <main>
+            <div class="container">
+                {{ content | safe }}
+            </div>
+        </main>
+    
+        <section class="lava"></section>
+    
+        <footer>
+            <div class="container">
+                <p>Copyright &copy; {{ site_author }}.</p>
+            </div>
+        </footer>
+
+        {% if javascripts %}
+            {% for javascript in javascripts %}
+                <script src="{{ javascript }}"></script>
+            {% endfor %}
+        {% endif %}
+    </body>
+</html>

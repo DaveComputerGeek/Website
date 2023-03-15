@@ -1,4 +1,5 @@
 ---
+page_title: "Contact"
 current_nav_item: "contact"
 ---
 

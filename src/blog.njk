@@ -10,7 +10,7 @@ current_nav_item: "blog"
         {% for blog_article in collections.blog_articles %}
             <article>
                 <div class="title">{{ blog_article.data.article_title }}</div>
-                <div class="metadata">Published by {{ blog_article.data.article_author }} on {{ blog_article.data.article_datetime }}.</div>
+                <div class="metadata">Published by {{ blog_article.data.article_author }} on {{ blog_article.data.article_date | articleDate }} at {{ blog_article.data.article_time }}.</div>
                 <div class="excerpt">
                     {{ blog_article.data.article_excerpt }}
                 </div>

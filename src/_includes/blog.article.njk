@@ -4,7 +4,7 @@ layout: "base.njk"
 
 <div class="article">
     <h2 class="title">{{ article_title }}</h2>
-    <p class="metadata">Published by {{ article_author }} on {{ article_datetime }}.</p>
+    <p class="metadata">Published by {{ article_author }} on {{ article_date | articleDate }} at {{ article_time }}.</p>
     
     {{ content | safe }}
 </div>

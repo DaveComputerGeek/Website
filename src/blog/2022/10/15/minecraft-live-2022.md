@@ -1,6 +1,6 @@
 ---
 article_title: "Minecraft Live 2022"
-article_date: "2022-10-15"
+article_date: 2022-10-15
 article_time: "19:00"
 article_excerpt: "SPOILER ALERT: This article contains things revealed and discussed during the annual Minecraft Live event. If you have not seen it yet, you should watch it before reading the article. A link to the video is provided at the start of the article for your convenience."
 ---

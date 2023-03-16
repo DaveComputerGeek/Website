@@ -9,7 +9,7 @@ article_excerpt: "SPOILER ALERT: This article contains things revealed and discu
 
 This article contains spoilers for Minecraft Live 2022! If you haven't watched it yet, you can watch it here.
 
-[Watch Minecraft Live in Full](https://www.youtube.com/watch?v=iM9KtHaDcUg)
+{% aNewTab 'https://www.youtube.com/watch?v=iM9KtHaDcUg', 'Watch Minecraft Live in Full' %}
 
 ![Minecraft Live 2022 Poster](/assets/images/blog/2022/10/15/minecraft-live-2022-poster.JPG)
 

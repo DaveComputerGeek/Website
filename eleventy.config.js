@@ -9,6 +9,10 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addFilter("articleDate", (dateObj) => {
         return DateTime.fromJSDate(dateObj).toLocaleString(DateTime.DATE_MED);
     });
+
+    eleventyConfig.addShortcode(
+        'aNewTab', (url, text) => `<a href="${url}" target="_blank">${text}</a>`
+    );
     
     // Return your Object options:
     return {

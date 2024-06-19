@@ -1,0 +1,22 @@
+---
+page_title: Blog
+current_nav_item: blog
+layout: src/_includes/base.php
+---
+
+<h2>The Blog</h2>
+
+<section class="article">
+    --- loop(dir = "src/blog", sort = "descending") ---
+        <article>
+            <div class="title">--- loop.article_title ---</div>
+            <div class="metadata">Published by --- loop.article_author --- on --- loop.article_date --- at --- loop.article_time ---.</div>
+            <div class="excerpt">
+                --- loop.article_excerpt ---
+            </div>
+            <div class="buttons">
+                <a href="--- loop.uri ---">Read More</a>
+            </div>
+        </article>
+    --- endloop ---
+</section>

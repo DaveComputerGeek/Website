@@ -57,7 +57,7 @@ $metadata_delimiter = "---";
 	Set to true to enable, or false to disable. Default is false.
 */
 
-$minify_html = false;
+$minify_html = true;
 
 
 /*
@@ -68,7 +68,7 @@ $minify_html = false;
 	Set to true to enable, or false to disable. Default is false.
 */
 
-$minify_css = false;
+$minify_css = true;
 
 
 /*
@@ -79,7 +79,7 @@ $minify_css = false;
 	Set to true to enable, or false to disable. Default is false.
 */
 
-$minify_js = false;
+$minify_js = true;
 
 
 //	END OF CONFIGURABLE OPTIONS

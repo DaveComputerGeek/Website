@@ -12,19 +12,19 @@
 
 //	Set this to the path where you have put your source files.
 
-$path_to_source_files = __DIR__ . DIRECTORY_SEPARATOR . "src";
+$configurable_options[ 'source_dir_path' ] = __DIR__ . DIRECTORY_SEPARATOR . "src";
 
 
 //	Set this to the path where you wish your generated output files.
 
-$path_to_public_files = __DIR__ . DIRECTORY_SEPARATOR . "public";
+$configurable_options[ 'output_dir_path' ] = __DIR__ . DIRECTORY_SEPARATOR . "public";
 
 
 //	Modify this array to include elements that will form parts of paths you wish to ignore.
 //	Any path that matches any of the elements of this array will not be processed at all.
 //	Such as PHP includes will still be converted as part of where they are included, but ignored as individual files.
 
-$paths_to_ignore = array( "_includes" );
+$configurable_options[ 'items_to_ignore' ] = array( "_includes" );
 
 
 /*
@@ -37,7 +37,7 @@ $paths_to_ignore = array( "_includes" );
 	About page URL example: https://website.tld/about/
 */
 
-$friendly_urls = true;
+$configurable_options[ 'friendly_urls' ] = true;
 
 
 /*
@@ -46,7 +46,7 @@ $friendly_urls = true;
 	This is what defines the start and end lines of metadata.
 */
 
-$metadata_delimiter = "---";
+$configurable_options[ 'metadata_delimiter' ] = "---";
 
 
 /*
@@ -57,7 +57,7 @@ $metadata_delimiter = "---";
 	Set to true to enable, or false to disable. Default is false.
 */
 
-$minify_html = true;
+$configurable_options[ 'minify_html' ] = false;
 
 
 /*
@@ -68,7 +68,7 @@ $minify_html = true;
 	Set to true to enable, or false to disable. Default is false.
 */
 
-$minify_css = true;
+$configurable_options[ 'minify_css' ] = false;
 
 
 /*
@@ -79,7 +79,18 @@ $minify_css = true;
 	Set to true to enable, or false to disable. Default is false.
 */
 
-$minify_js = true;
+$configurable_options[ 'minify_js' ] = false;
+
+
+/*
+	Auto Update
+
+	Downloads the latest version of StaticPHP upon every run to ensure you always run the latest version.
+
+	If you wish to use a specific version of StaticPHP, or if your connection to the internet is weak or limited,
+	you should disable this feature by setting it to false.
+*/
+$configurable_options[ 'auto_update' ] = true;
 
 
 //	END OF CONFIGURABLE OPTIONS
@@ -94,44 +105,87 @@ $project_name = "StaticPHP";
 $project_author_username = "DAH5";
 $project_branch = "master";
 
-$path_to_latest_code = "https://raw.githubusercontent.com/" . $project_author_username . "/" . $project_name . "/" . $project_branch . "/" . $project_name . ".php";
+$path_to_latest_code_on_github = "https://raw.githubusercontent.com/" . $project_author_username . "/" . $project_name . "/" . $project_branch . "/" . $project_name . ".php";
+$path_to_latest_code_on_gitlab = "https://gitlab.com/" . $project_author_username . "/" . $project_name . "/-/raw/master/" . $project_name . ".php";
+
 $path_to_local_file = __DIR__ . DIRECTORY_SEPARATOR . $project_name . ".php";
 
 echo "Welcome to the " . $project_name . " Launcher!\n\n";
-echo "Setting source directory path to: " . $path_to_source_files . "\n";
-echo "Setting public files directory path to: " . $path_to_public_files . "\n";
 
-if( count( $paths_to_ignore ) > 0 )
-	echo "Setting paths to ignore to: " . join( ", ", $paths_to_ignore ) . "\n";
+if( isset( $configurable_options[ 'source_dir_path' ] ) && is_string( $configurable_options[ 'source_dir_path' ] ) && trim( $configurable_options[ 'source_dir_path' ] ) != "" )
+	echo "Setting source directory path to: " . $configurable_options[ 'source_dir_path' ] . "\n";
 
-echo "Setting Friendly URLs to: " . ( $friendly_urls ? "Enabled" : "Disabled" ) . "\n";
-echo "Setting MetaData Delimiter to: " . $metadata_delimiter;
+if( isset( $configurable_options[ 'output_dir_path' ] ) && is_string( $configurable_options[ 'output_dir_path' ] ) && trim( $configurable_options[ 'output_dir_path' ] ) != "" )
+	echo "Setting output directory path to: " . $configurable_options[ 'output_dir_path' ] . "\n";
 
-echo "\nFetching latest " . $project_name . " from " . $path_to_latest_code . "\n";
-$latest_code = file_get_contents( $path_to_latest_code );
+if( isset( $configurable_options[ 'paths_to_ignore' ] ) && is_array( $configurable_options[ 'paths_to_ignore' ] ) && count( $configurable_options[ 'paths_to_ignore'] ) > 0 )
+	echo "Setting paths to ignore to: " . join( ", ", $configurable_options[ 'paths_to_ignore' ] ) . "\n";
 
-echo "Saving to local path " . $path_to_local_file . "\n";
-file_put_contents( $path_to_local_file, $latest_code );
+if( isset( $configurable_options[ 'friendly_urls' ] ) && is_bool( $configurable_options[ 'friendly_urls' ] ) )
+	echo "Setting Friendly URLs to: " . ( $configurable_options[ 'friendly_urls' ] ? "Enabled" : "Disabled" ) . "\n";
 
-echo "Verifying local file...\n";
-if( is_file( $path_to_local_file ) && file_get_contents( $path_to_local_file ) == $latest_code )
+if( isset( $configurable_options[ 'metadata_delimiter' ] ) && is_string( $configurable_options[ 'metadata_delimiter' ] ) && trim( $configurable_options[ 'metadata_delimiter' ] ) )
+	echo "Setting MetaData Delimiter to: " . $configurable_options[ 'metadata_delimiter' ];
+
+if( ( isset( $configurable_options[ 'auto_update' ] ) && is_bool( $configurable_options[ 'auto_update' ] ) && $configurable_options[ 'auto_update' ] === true ) || ! is_file( $path_to_local_file ) )
 {
-	echo "Loading " . $project_name . "...\n";
-	include $path_to_local_file;
+	echo "\nAttempting to fetch latest " . $project_name . " code from GitHub: " . $path_to_latest_code_on_github . "\n";
+
+	$latest_code = "";
+
+	$github_headers = @get_headers( $path_to_latest_code_on_github );
 	
-	if( class_exists( $project_name ) )
+	if( $github_headers && strpos( $github_headers[ 0 ], '200' ) )
+		$latest_code = file_get_contents( $path_to_latest_code_on_github );
+	else
 	{
-		echo "Running " . $project_name . "...\n\n";
-		$project = new $project_name( $path_to_source_files, $path_to_public_files, $paths_to_ignore, $friendly_urls, $metadata_delimiter, $minify_html, $minify_css, $minify_js );
+		echo "\nAttempting to fetch latest " . $project_name . " code from GitLab: " . $path_to_latest_code_on_gitlab . "\n";
+		$gitlab_headers = @get_headers( $path_to_latest_code_on_gitlab );
+
+		if( $gitlab_headers && strpos( $gitlab_headers[ 0 ], '200' ) )
+			$latest_code = file_get_contents( $path_to_latest_code_on_gitlab );
 	}
-	
-	echo "\n\nRemoving local " . $project_name . " file...\n";
-	unlink( $path_to_local_file );
-	
-	echo "\nThank you for using the " . $project_name . " Launcher!\n\n";
-	
-	exit;
+
+	if( $latest_code == "" )
+	{
+		echo "\nUnable to access latest code on GitHub or GitLab. Please check your network connection.\n\n";
+
+		echo "\nThank you for using the " . $project_name . " Launcher!\n\n";
+
+		exit;
+	}
+
+	echo "Saving to local path " . $path_to_local_file . "\n";
+	file_put_contents( $path_to_local_file, $latest_code );
+
+	echo "Verifying local file...\n";
+	if( ! is_file( $path_to_local_file ) && file_get_contents( $path_to_local_file ) != $latest_code )
+	{
+		echo "Local file check failed!\n\n";
+
+		echo "\nThank you for using the " . $project_name . " Launcher!\n\n";
+
+		exit;
+	}
 }
 
-echo "Local file check failed!\n\n";
+echo "Loading " . $project_name . "...\n";
+include $path_to_local_file;
 
+if( class_exists( $project_name ) )
+{
+	echo "Running " . $project_name . "...\n\n";
+
+	if( isset( $configurable_options ) && is_array( $configurable_options ) )
+		$project = new $project_name( $configurable_options );
+	else
+		$project = new $project_name();
+}
+
+if( isset( $configurable_options[ 'auto_update' ] ) && is_bool( $configurable_options[ 'auto_update' ] ) && $configurable_options[ 'auto_update' ] === true )
+{
+	echo "\n\nRemoving local " . $project_name . " file...\n";
+	unlink( $path_to_local_file );
+}
+	
+echo "\nThank you for using the " . $project_name . " Launcher!\n\n";

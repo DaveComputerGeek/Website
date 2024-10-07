@@ -1,0 +1,9 @@
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+
+    RewriteCond %{SERVER_PORT} ^80$ [OR]
+    RewriteCond %{HTTP_HOST} !^www.davecomputergeek.com$
+    RewriteRule ^(.*)$ https://www.davecomputergeek.com/$1 [R=301,END]
+</IfModule>

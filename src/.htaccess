@@ -4,6 +4,6 @@ ErrorDocument 404 /404.html
     RewriteEngine on
 
     RewriteCond %{SERVER_PORT} ^80$ [OR]
-    RewriteCond %{HTTP_HOST} !^www.davecomputergeek.com$
-    RewriteRule ^(.*)$ https://www.davecomputergeek.com/$1 [R=301,END]
+    RewriteCond %{HTTP_HOST} !^davecomputergeek.webaddr.net$
+    RewriteRule ^(.*)$ https://davecomputergeek.webaddr.net/$1 [R=301,END]
 </IfModule>

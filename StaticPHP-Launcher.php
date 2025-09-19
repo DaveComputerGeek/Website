@@ -57,7 +57,7 @@ $configurable_options[ 'metadata_delimiter' ] = "---";
 	Set to true to enable, or false to disable. Default is false.
 */
 
-$configurable_options[ 'minify_html' ] = false;
+$configurable_options[ 'minify_html' ] = true;
 
 
 /*
@@ -68,7 +68,7 @@ $configurable_options[ 'minify_html' ] = false;
 	Set to true to enable, or false to disable. Default is false.
 */
 
-$configurable_options[ 'minify_css' ] = false;
+$configurable_options[ 'minify_css' ] = true;
 
 
 /*
@@ -79,7 +79,152 @@ $configurable_options[ 'minify_css' ] = false;
 	Set to true to enable, or false to disable. Default is false.
 */
 
-$configurable_options[ 'minify_js' ] = false;
+$configurable_options[ 'minify_js' ] = true;
+
+
+/*
+	Minify HTML Tags to Preserve
+
+	Preserves the following tags as-is during the Minify HTML process, resulting in them not being minified like the rest of the code.
+
+	Set to an array of tag names (e.g. "pre") to enable, set to an empty array, or remove the option entirely to disable.
+*/
+
+$configurable_options[ 'minify_html_tags_to_preserve' ] = array();
+
+
+/*
+	Bulk Redirects Filename
+
+	Your preferred filename to use as the file where your bulk redirection rules are defined.
+	
+	Set to a string (e.g. "_my_bulk_redirects"). Defaults to "_bulk_redirects" if not specified.
+*/
+
+$configurable_options[ 'bulk_redirects_filename' ] = "_bulk_redirects";
+
+
+/*
+	Redirection Template Filename
+
+	Your preferred filename to use as the redirection template generated for all redirections.
+
+	Set to a string (e.g. "_my_redirection_template.html"). Defaults to "_redirection_template.html" if not specified.
+*/
+
+$configurable_options[ 'redirection_template_filename' ] = "_redirection_template.html";
+
+
+/*
+	Minify CSS In-Place
+
+	Whether to output CSS files in minified form only, or to output both original and minified versions (minified ending in .min.css).
+
+	Set to true to just minify CSS files, or false to output both versions. Defaults to true.
+*/
+
+$configurable_options[ 'minify_css_inplace' ] = true;
+
+
+/*
+	Items To Passthrough
+
+	Sometimes you may wish a PHP script or file that StaticPHP would normally process, remain in the output as-is.
+
+	Set items_to_passthrough to an array of path parts you wish to match against, where StaticPHP will simply copy them over to output.
+
+	Defaults to an empty array.
+*/
+
+$configurable_options[ 'items_to_passthrough' ] = array();
+
+
+/*
+	Test Mode
+
+	Set to true to perform tests instead of normal processing.
+
+	Defaults to false.
+*/
+
+$configurable_options[ 'test_mode' ] = false;
+
+
+/*
+	Test Mode Input Directory Path
+
+	Directory path containing test input files.
+
+	Defaults to "tests/input".
+*/
+
+$configurable_options[ 'test_mode_input_dir_path' ] = __DIR__ . DIRECTORY_SEPARATOR . "tests" . DIRECTORY_SEPARATOR . "input";
+
+
+/*
+	Test Mode Expected Directory Path
+
+	Directory path containing test expected output files.
+
+	Defaults to "tests/expected".
+*/
+
+$configurable_options[ 'test_mode_expected_dir_path' ] = __DIR__ . DIRECTORY_SEPARATOR . "tests" . DIRECTORY_SEPARATOR . "expected";
+
+
+/*
+	Test Mode Output Directory Path
+
+	Directory path for where to output test results.
+
+	Defaults to "tests/output".
+*/
+
+$configurable_options[ 'test_mode_output_dir_path' ] = __DIR__ . DIRECTORY_SEPARATOR . "tests" . DIRECTORY_SEPARATOR . "output";
+
+
+/*
+	Test Mode Output Results File
+
+	If set to true, a file containing the test results will be generated.
+
+	Defaults to true. Set to false to disable.
+*/
+
+$configurable_options[ 'test_mode_output_results_file' ] = true;
+
+
+/*
+	Test Mode Results File Path
+
+	If test_mode_output_results_file is set to true, an HTML file will be generated containing the test results at the specified path.
+
+	Defaults to "tests/output/results.html".
+*/
+
+$configurable_options[ 'test_mode_results_file_path' ] = __DIR__ . DIRECTORY_SEPARATOR . "tests" . DIRECTORY_SEPARATOR . "output" . DIRECTORY_SEPARATOR . "results.html";
+
+
+/*
+	Generate Standard Redirects File
+
+	Set this to true if you want a "_redirects" file to be generated based on your _bulk_redirects file.
+
+	Defaults to false.
+*/
+
+$configurable_options[ 'generate_standard_redirects_file' ] = false;
+
+
+/*
+	Generate Htaccess Redirections
+
+	Set this to true if you want a ".htaccess" file to be generated based on your _bulk_redirects file.
+
+	Defaults to false.
+*/
+
+$configurable_options[ 'generate_htaccess_redirections' ] = false;
 
 
 /*
@@ -102,33 +247,34 @@ $configurable_options[ 'auto_update' ] = true;
 
 
 $project_name = "StaticPHP";
-$project_author_username = "Softwayr";
+$project_author_username = "DAH5";
 $project_branch = "master";
 
 $path_to_latest_code_on_github = "https://raw.githubusercontent.com/" . $project_author_username . "/" . $project_name . "/" . $project_branch . "/" . $project_name . ".php";
+$path_to_latest_code_on_gitlab = "https://gitlab.com/" . $project_author_username . "/" . $project_name . "/-/raw/" . $project_branch . "/" . $project_name . ".php";
 
 $path_to_local_file = __DIR__ . DIRECTORY_SEPARATOR . $project_name . ".php";
 
-echo "Welcome to the " . $project_name . " Launcher!\n\n";
+echo "Welcome to the " . $project_name . " Launcher!" . PHP_EOL . PHP_EOL;
 
 if( isset( $configurable_options[ 'source_dir_path' ] ) && is_string( $configurable_options[ 'source_dir_path' ] ) && trim( $configurable_options[ 'source_dir_path' ] ) != "" )
-	echo "Setting source directory path to: " . $configurable_options[ 'source_dir_path' ] . "\n";
+	echo "Setting source directory path to: " . $configurable_options[ 'source_dir_path' ] . PHP_EOL;
 
 if( isset( $configurable_options[ 'output_dir_path' ] ) && is_string( $configurable_options[ 'output_dir_path' ] ) && trim( $configurable_options[ 'output_dir_path' ] ) != "" )
-	echo "Setting output directory path to: " . $configurable_options[ 'output_dir_path' ] . "\n";
+	echo "Setting output directory path to: " . $configurable_options[ 'output_dir_path' ] . PHP_EOL;
 
 if( isset( $configurable_options[ 'paths_to_ignore' ] ) && is_array( $configurable_options[ 'paths_to_ignore' ] ) && count( $configurable_options[ 'paths_to_ignore'] ) > 0 )
-	echo "Setting paths to ignore to: " . join( ", ", $configurable_options[ 'paths_to_ignore' ] ) . "\n";
+	echo "Setting paths to ignore to: " . join( ", ", $configurable_options[ 'paths_to_ignore' ] ) . PHP_EOL;
 
 if( isset( $configurable_options[ 'friendly_urls' ] ) && is_bool( $configurable_options[ 'friendly_urls' ] ) )
-	echo "Setting Friendly URLs to: " . ( $configurable_options[ 'friendly_urls' ] ? "Enabled" : "Disabled" ) . "\n";
+	echo "Setting Friendly URLs to: " . ( $configurable_options[ 'friendly_urls' ] ? "Enabled" : "Disabled" ) . PHP_EOL;
 
 if( isset( $configurable_options[ 'metadata_delimiter' ] ) && is_string( $configurable_options[ 'metadata_delimiter' ] ) && trim( $configurable_options[ 'metadata_delimiter' ] ) )
 	echo "Setting MetaData Delimiter to: " . $configurable_options[ 'metadata_delimiter' ];
 
 if( ( isset( $configurable_options[ 'auto_update' ] ) && is_bool( $configurable_options[ 'auto_update' ] ) && $configurable_options[ 'auto_update' ] === true ) || ! is_file( $path_to_local_file ) )
 {
-	echo "\nAttempting to fetch latest " . $project_name . " code from GitHub: " . $path_to_latest_code_on_github . "\n";
+	echo PHP_EOL . "Attempting to fetch latest " . $project_name . " code from GitHub: " . $path_to_latest_code_on_github . PHP_EOL;
 
 	$latest_code = "";
 
@@ -136,36 +282,44 @@ if( ( isset( $configurable_options[ 'auto_update' ] ) && is_bool( $configurable_
 	
 	if( $github_headers && strpos( $github_headers[ 0 ], '200' ) )
 		$latest_code = file_get_contents( $path_to_latest_code_on_github );
+	else
+	{
+		echo PHP_EOL . "Attempting to fetch latest " . $project_name . " code from GitLab: " . $path_to_latest_code_on_gitlab . PHP_EOL;
+		$gitlab_headers = @get_headers( $path_to_latest_code_on_gitlab );
+
+		if( $gitlab_headers && strpos( $gitlab_headers[ 0 ], '200' ) )
+			$latest_code = file_get_contents( $path_to_latest_code_on_gitlab );
+	}
 
 	if( $latest_code == "" )
 	{
-		echo "\nUnable to access latest code on GitHub. Please check your network connection.\n\n";
+		echo PHP_EOL . "Unable to access latest code on GitHub or GitLab. Please check your network connection." . PHP_EOL . PHP_EOL;
 
-		echo "\nThank you for using the " . $project_name . " Launcher!\n\n";
+		echo PHP_EOL . "Thank you for using the " . $project_name . " Launcher!" . PHP_EOL . PHP_EOL;
 
 		exit;
 	}
 
-	echo "Saving to local path " . $path_to_local_file . "\n";
+	echo "Saving to local path " . $path_to_local_file . PHP_EOL;
 	file_put_contents( $path_to_local_file, $latest_code );
 
 	echo "Verifying local file...\n";
 	if( ! is_file( $path_to_local_file ) && file_get_contents( $path_to_local_file ) != $latest_code )
 	{
-		echo "Local file check failed!\n\n";
+		echo "Local file check failed!" . PHP_EOL . PHP_EOL;
 
-		echo "\nThank you for using the " . $project_name . " Launcher!\n\n";
+		echo PHP_EOL . "Thank you for using the " . $project_name . " Launcher!" . PHP_EOL . PHP_EOL;
 
 		exit;
 	}
 }
 
-echo "Loading " . $project_name . "...\n";
+echo "Loading " . $project_name . "..." . PHP_EOL;
 include $path_to_local_file;
 
 if( class_exists( $project_name ) )
 {
-	echo "Running " . $project_name . "...\n\n";
+	echo "Running " . $project_name . "..." . PHP_EOL . PHP_EOL;
 
 	if( isset( $configurable_options ) && is_array( $configurable_options ) )
 		$project = new $project_name( $configurable_options );
@@ -175,8 +329,8 @@ if( class_exists( $project_name ) )
 
 if( isset( $configurable_options[ 'auto_update' ] ) && is_bool( $configurable_options[ 'auto_update' ] ) && $configurable_options[ 'auto_update' ] === true )
 {
-	echo "\n\nRemoving local " . $project_name . " file...\n";
+	echo PHP_EOL . PHP_EOL . "Removing local " . $project_name . " file..." . PHP_EOL;
 	unlink( $path_to_local_file );
 }
 	
-echo "\nThank you for using the " . $project_name . " Launcher!\n\n";
+echo PHP_EOL . "Thank you for using the " . $project_name . " Launcher!" . PHP_EOL . PHP_EOL;
